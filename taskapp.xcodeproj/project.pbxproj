@@ -12,6 +12,7 @@
 		CF00E7231C9F6E0E00A982F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF00E7211C9F6E0E00A982F2 /* Main.storyboard */; };
 		CF00E7251C9F6E0E00A982F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF00E7241C9F6E0E00A982F2 /* Assets.xcassets */; };
 		CF00E7281C9F6E0E00A982F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF00E7261C9F6E0E00A982F2 /* LaunchScreen.storyboard */; };
+		CF00E7301C9F807600A982F2 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00E72F1C9F807600A982F2 /* InputViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CF00E7241C9F6E0E00A982F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF00E7271C9F6E0E00A982F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF00E7291C9F6E0E00A982F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF00E72F1C9F807600A982F2 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				CF00E71D1C9F6E0E00A982F2 /* AppDelegate.swift */,
 				CF00E71F1C9F6E0E00A982F2 /* ViewController.swift */,
 				CF00E7211C9F6E0E00A982F2 /* Main.storyboard */,
+				CF00E72F1C9F807600A982F2 /* InputViewController.swift */,
 				CF00E7241C9F6E0E00A982F2 /* Assets.xcassets */,
 				CF00E7261C9F6E0E00A982F2 /* LaunchScreen.storyboard */,
 				CF00E7291C9F6E0E00A982F2 /* Info.plist */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF00E7301C9F807600A982F2 /* InputViewController.swift in Sources */,
 				CF00E7201C9F6E0E00A982F2 /* ViewController.swift in Sources */,
 				CF00E71E1C9F6E0E00A982F2 /* AppDelegate.swift in Sources */,
 			);
