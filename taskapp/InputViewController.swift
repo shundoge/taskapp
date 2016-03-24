@@ -11,10 +11,29 @@ import RealmSwift
 
 class InputViewController: UIViewController {
     
+    @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var categorySegmentedControl: UISegmentedControl!
     
+    @IBAction func pushCategory(sender: AnyObject) {
+        let Stamp = sender.selectedSegmentIndex
+        switch  Stamp {
+        case 0 :
+            categoryTextField.text! += "仕事"
+        case 1 :
+            categoryTextField.text! += "私事"
+        case 2 :
+            categoryTextField.text! += "友人"
+        case 3 :
+            categoryTextField.text! += "家族"
+        case 4 :
+            categoryTextField.text! += "特別"
+        default :
+            categoryTextField.text! += ""
+        }
+    }
     let realm = try! Realm()
     var task:Task!
     
@@ -24,8 +43,10 @@ class InputViewController: UIViewController {
         // 背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:"dismissKeyboard")
         self.view.addGestureRecognizer(tapGesture)
+        //categorySegmentedControl.
         
         titleTextField.text = task.title
+        categoryTextField.text = task.category
         contentsTextView.text = task.contents
         datePicker.date = task.date
     }
@@ -37,6 +58,7 @@ class InputViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         try! realm.write {
             self.task.title = self.titleTextField.text!
+            self.task.category = self.categoryTextField.text!
             self.task.contents = self.contentsTextView.text
             self.task.date = self.datePicker.date
             self.realm.add(self.task, update: true)

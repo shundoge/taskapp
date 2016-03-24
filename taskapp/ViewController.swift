@@ -10,20 +10,49 @@ import UIKit
 import RealmSwift   // ←追加
 
 class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
-    @IBOutlet weak var tableView: UITableView!
 
+ 
+    @IBOutlet weak var searchTitleTextField: UITextField!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchCategoryTextField: UITextField!
     // Realmインスタンスを取得する
     let realm = try! Realm()  // ←追加
     
     // DB内のタスクが格納されるリスト。
     // 日付近い順\順でソート：降順
     // 以降内容をアップデートするとリスト内は自動的に更新される。
-    let taskArray = try! Realm().objects(Task).sorted("date", ascending: false)   // ←追加
+    //Realm().objects(Task).sorted("date", ascending: false)
     
+    var taskArray : RealmSwift.Results<taskapp.Task>!
+    
+    @IBAction func searchButton(sender: AnyObject) {
+        if(searchTitleTextField.text!.isEmpty){
+            if(searchCategoryTextField.text!.isEmpty){
+                taskArray = try! Realm().objects(Task)
+            }
+            else{
+                taskArray = try! Realm().objects(Task).filter("category CONTAINS '" + searchCategoryTextField.text! + "'" )
+            }
+        }
+        else{
+            if(searchCategoryTextField.text!.isEmpty){
+                taskArray = try! Realm().objects(Task).filter("title CONTAINS '" + searchTitleTextField.text! + "'" )
+            }
+            else{
+                taskArray = try! Realm().objects(Task).filter("title CONTAINS '" + searchTitleTextField.text! + "' OR category CONTAINS '" + searchCategoryTextField.text! + "'" )
+            }
+            
+        }
+        tableView.reloadData()
+    }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        taskArray = try! Realm().objects(Task)
+        //taskArray = try! Realm().objects(Task).filter("title CONTAINS " + searchCategoryTextField.text!)
+        //taskArray = try! Realm().objects(Task).filter("title CONTAINS 'ABC'")
+//title CONTAINS '" + searchTitleTextField.text! + "'AND
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -39,12 +68,16 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     
     // 各セルの内容を返すメソッド
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
         // 再利用可能な cell を得る
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
         // Cellに値を設定する.
         let task = taskArray[indexPath.row]
-        cell.textLabel?.text = task.title
+        cell.textLabel?.text =  " タイトル:" + task.title + "   カテゴリ:" + task.category
+
+        //let task = taskArray[indexPath.row]
+        //cell. textLabel?.text = task.category
         
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
