@@ -50,10 +50,13 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         taskArray = try! Realm().objects(Task)
-        //taskArray = try! Realm().objects(Task).filter("title CONTAINS " + searchCategoryTextField.text!)
-        //taskArray = try! Realm().objects(Task).filter("title CONTAINS 'ABC'")
-//title CONTAINS '" + searchTitleTextField.text! + "'AND
-        // Do any additional setup after loading the view, typically from a nib.
+        // 背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:"dismissKeyboard")
+        self.view.addGestureRecognizer(tapGesture)
+   }
+    func dismissKeyboard(){
+        // キーボードを閉じる
+        view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
